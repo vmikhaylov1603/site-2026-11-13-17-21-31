@@ -113,10 +113,73 @@
       transition: transform 0.2s;
     }
     .card:hover { transform: translateY(-4px); }
-    .card .emoji { font-size: 3rem; }
+    .card .emoji { font-size: 3rem; display: inline-block; }
     .card h3 { margin: 10px 0 6px; color: #2e6b3a; }
     .card p { font-size: 0.95rem; color: #555; }
     .hidden { display: none; }
+
+    /* Анимации животных */
+    .anim-tiger {
+      animation: tigerPace 3s ease-in-out infinite alternate;
+    }
+    @keyframes tigerPace {
+      0%   { transform: translateX(-12px) scaleX(-1); }
+      100% { transform: translateX(12px) scaleX(-1); }
+    }
+
+    .anim-bear {
+      transform-origin: 50% 100%;
+      animation: bearSway 2.4s ease-in-out infinite;
+    }
+    @keyframes bearSway {
+      0%, 100% { transform: rotate(-6deg); }
+      50%      { transform: rotate(6deg); }
+    }
+
+    .anim-giraffe {
+      transform-origin: 50% 100%;
+      animation: giraffeNeck 3.2s ease-in-out infinite;
+    }
+    @keyframes giraffeNeck {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50%      { transform: translateY(-6px) rotate(4deg); }
+    }
+
+    .anim-owl {
+      animation: owlTurn 4s ease-in-out infinite;
+    }
+    @keyframes owlTurn {
+      0%, 30%  { transform: rotate(0deg); }
+      40%, 60% { transform: rotate(-10deg); }
+      70%, 90% { transform: rotate(10deg); }
+      100%     { transform: rotate(0deg); }
+    }
+
+    .anim-swan {
+      animation: swanFloat 3.5s ease-in-out infinite;
+    }
+    @keyframes swanFloat {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50%      { transform: translateY(-8px) rotate(3deg); }
+    }
+
+    .anim-croc {
+      animation: crocSwim 2.8s ease-in-out infinite;
+    }
+    @keyframes crocSwim {
+      0%, 100% { transform: translateX(0) rotate(-3deg); }
+      25%      { transform: translateX(6px) rotate(2deg); }
+      50%      { transform: translateX(0) rotate(3deg); }
+      75%      { transform: translateX(-6px) rotate(-2deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .anim-tiger, .anim-bear, .anim-giraffe,
+      .anim-owl, .anim-swan, .anim-croc {
+        animation: none;
+      }
+    }
+
     .info-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -211,32 +274,32 @@
       </div>
       <div class="cards">
         <div class="card" data-category="mammals">
-          <div class="emoji">🐯</div>
+          <div class="emoji anim-tiger">🐯</div>
           <h3>Амурский тигр</h3>
           <p>Крупнейшая кошка планеты, обитающая в тайге Дальнего Востока.</p>
         </div>
         <div class="card" data-category="mammals">
-          <div class="emoji">🐻</div>
+          <div class="emoji anim-bear">🐻</div>
           <h3>Бурый медведь</h3>
           <p>Символ сибирских лесов, любит ягоды, мёд и долгий сон зимой.</p>
         </div>
         <div class="card" data-category="mammals">
-          <div class="emoji">🦒</div>
+          <div class="emoji anim-giraffe">🦒</div>
           <h3>Жирафы</h3>
           <p>Самые высокие животные на суше с необычно длинной шеей.</p>
         </div>
         <div class="card" data-category="birds">
-          <div class="emoji">🦉</div>
+          <div class="emoji anim-owl">🦉</div>
           <h3>Филин</h3>
           <p>Ночной хищник с отличным слухом и бесшумным полётом.</p>
         </div>
         <div class="card" data-category="birds">
-          <div class="emoji">🦢</div>
+          <div class="emoji anim-swan">🦢</div>
           <h3>Лебеди</h3>
           <p>Красивые водоплавающие птицы, гордость городских прудов.</p>
         </div>
         <div class="card" data-category="reptiles">
-          <div class="emoji">🐊</div>
+          <div class="emoji anim-croc">🐊</div>
           <h3>Крокодил</h3>
           <p>Древний хищник, который почти не изменился за миллионы лет.</p>
         </div>
