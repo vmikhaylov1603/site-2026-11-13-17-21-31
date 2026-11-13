@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Новосибирский зоопарк</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #2d3b2d;
+      background: #f7f9f4;
+      line-height: 1.6;
+    }
+    header {
+      background: #2e6b3a;
+      color: #fff;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    nav {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .logo { font-weight: bold; font-size: 1.2rem; }
+    nav ul { list-style: none; display: flex; gap: 18px; flex-wrap: wrap; }
+    nav a { color: #fff; text-decoration: none; }
+    nav a:hover { text-decoration: underline; }
+    .hero {
+      background: linear-gradient(135deg, #4c9a5a, #2e6b3a);
+      color: #fff;
+      text-align: center;
+      padding: 90px 20px;
+    }
+    .hero h1 { font-size: 2.6rem; margin-bottom: 14px; }
+    .hero p { font-size: 1.2rem; max-width: 640px; margin: 0 auto 26px; }
+    .btn {
+      display: inline-block;
+      background: #ffc857;
+      color: #2d3b2d;
+      padding: 12px 26px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+    .btn:hover { background: #ffb42e; }
+    section {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 60px 20px;
+    }
+    h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #2e6b3a;
+    }
+    .about-text { max-width: 720px; margin: 0 auto; text-align: center; font-size: 1.1rem; }
+    .stats {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-top: 36px;
+    }
+    .stat {
+      background: #fff;
+      border-radius: 10px;
+      padding: 22px 28px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      text-align: center;
+      min-width: 160px;
+    }
+    .stat strong { display: block; font-size: 1.8rem; color: #2e6b3a; }
+    .animals { background: #eaf2e4; max-width: none; }
+    .animals-inner { max-width: 1000px; margin: 0 auto; }
+    .filters { text-align: center; margin-bottom: 26px; }
+    .filters button {
+      background: #fff;
+      border: 2px solid #2e6b3a;
+      color: #2e6b3a;
+      padding: 7px 16px;
+      margin: 4px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+    .filters button.active, .filters button:hover {
+      background: #2e6b3a;
+      color: #fff;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 24px 18px;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      transition: transform 0.2s;
+    }
+    .card:hover { transform: translateY(-4px); }
+    .card .emoji { font-size: 3rem; }
+    .card h3 { margin: 10px 0 6px; color: #2e6b3a; }
+    .card p { font-size: 0.95rem; color: #555; }
+    .hidden { display: none; }
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .info-box {
+      background: #fff;
+      border-left: 5px solid #ffc857;
+      padding: 22px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    }
+    .info-box h3 { margin-bottom: 10px; color: #2e6b3a; }
+    .info-box ul { list-style: none; }
+    .info-box li { padding: 4px 0; border-bottom: 1px dashed #ddd; }
+    .info-box li:last-child { border-bottom: none; }
+    form {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    input, textarea {
+      padding: 12px;
+      border: 1px solid #bbb;
+      border-radius: 6px;
+      font-size: 1rem;
+      font-family: inherit;
+    }
+    textarea { min-height: 110px; resize: vertical; }
+    #form-msg { text-align: center; color: #2e6b3a; font-weight: bold; min-height: 24px; margin-top: 12px; }
+    footer {
+      background: #2d3b2d;
+      color: #ccc;
+      text-align: center;
+      padding: 24px 20px;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2rem; }
+      .hero { padding: 60px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <div class="logo">🦁 Новосибирский зоопарк</div>
+      <ul>
+        <li><a href="#about">О зоопарке</a></li>
+        <li><a href="#animals">Животные</a></li>
+        <li><a href="#visit">Посетителям</a></li>
+        <li><a href="#contacts">Контакты</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="hero">
+    <h1>Добро пожаловать в Новосибирский зоопарк</h1>
+    <p>Встречайте животных со всех уголков планеты прямо в центре Сибири. Прогулка, которая понравится и детям, и взрослым.</p>
+    <a href="#animals" class="btn">Смотреть животных</a>
+  </div>
+
+  <section id="about">
+    <h2>О зоопарке</h2>
+    <p class="about-text">
+      Новосибирский зоопарк — один из крупнейших зоопарков России. Здесь живут более тысячи животных
+      из разных стран и климатических зон. Большое внимание уделяется сохранению редких видов,
+      просветительской работе и заботе о здоровье каждого обитателя.
+    </p>
+    <div class="stats">
+      <div class="stat"><strong>1000+</strong>животных</div>
+      <div class="stat"><strong>300+</strong>видов</div>
+      <div class="stat"><strong>Для всей семьи</strong>круглый год</div>
+    </div>
+  </section>
+
+  <section id="animals" class="animals">
+    <div class="animals-inner">
+      <h2>Наши обитатели</h2>
+      <div class="filters">
+        <button class="active" data-filter="all">Все</button>
+        <button data-filter="mammals">Млекопитающие</button>
+        <button data-filter="birds">Птицы</button>
+        <button data-filter="reptiles">Рептилии</button>
+      </div>
+      <div class="cards">
+        <div class="card" data-category="mammals">
+          <div class="emoji">🐯</div>
+          <h3>Амурский тигр</h3>
+          <p>Крупнейшая кошка планеты, обитающая в тайге Дальнего Востока.</p>
+        </div>
+        <div class="card" data-category="mammals">
+          <div class="emoji">🐻</div>
+          <h3>Бурый медведь</h3>
+          <p>Символ сибирских лесов, любит ягоды, мёд и долгий сон зимой.</p>
+        </div>
+        <div class="card" data-category="mammals">
+          <div class="emoji">🦒</div>
+          <h3>Жирафы</h3>
+          <p>Самые высокие животные на суше с необычно длинной шеей.</p>
+        </div>
+        <div class="card" data-category="birds">
+          <div class="emoji">🦉</div>
+          <h3>Филин</h3>
+          <p>Ночной хищник с отличным слухом и бесшумным полётом.</p>
+        </div>
+        <div class="card" data-category="birds">
+          <div class="emoji">🦢</div>
+          <h3>Лебеди</h3>
+          <p>Красивые водоплавающие птицы, гордость городских прудов.</p>
+        </div>
+        <div class="card" data-category="reptiles">
+          <div class="emoji">🐊</div>
+          <h3>Крокодил</h3>
+          <p>Древний хищник, который почти не изменился за миллионы лет.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="visit">
+    <h2>Посетителям</h2>
+    <div class="info-grid">
+      <div class="info-box">
+        <h3>Часы работы</h3>
+        <ul>
+          <li>Ежедневно: 10:00 – 18:00</li>
+          <li>Касса закрывается за час до закрытия</li>
+          <li>Выходных нет</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h3>Стоимость билетов</h3>
+        <ul>
+          <li>Взрослый: уточняйте на кассе</li>
+          <li>Детский: уточняйте на кассе</li>
+          <li>Дети до 3 лет — бесплатно</li>
+        </ul>
+      </div>
+      <div class="info-box">
+        <h3>Советы</h3>
+        <ul>
+          <li>Не кормите животных</li>
+          <li>Удобная обувь обязательна</li>
+          <li>Возьмите воду и головной убор</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacts">
+    <h2>Свяжитесь с нами</h2>
+    <form id="contact-form">
+      <input type="text" id="name" placeholder="Ваше имя" required>
+      <input type="email" id="email" placeholder="Email" required>
+      <textarea id="message" placeholder="Ваш вопрос или пожелание" required></textarea>
+      <button type="submit" class="btn">Отправить</button>
+      <div id="form-msg"></div>
+    </form>
+  </section>
+
+  <footer>
+    <p>© <span id="year"></span> Новосибирский зоопарк. Все права защищены.</p>
+  </footer>
+
+  <script>
+    // Фильтрация животных по категориям
+    const filterButtons = document.querySelectorAll('.filters button');
+    const cards = document.querySelectorAll('.card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const filter = btn.dataset.filter;
+        cards.forEach(card => {
+          const show = filter === 'all' || card.dataset.category === filter;
+          card.classList.toggle('hidden', !show);
+        });
+      });
+    });
+
+    // Обработка формы
+    document.getElementById('contact-form').addEventListener('submit', e => {
+      e.preventDefault();
+      document.getElementById('form-msg').textContent = 'Спасибо! Ваше сообщение отправлено.';
+      e.target.reset();
+    });
+
+    // Текущий год в футере
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>
